@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200i,300');
+        html,body,pre {padding:0; margin:0;text-align: center;}
+        
+        k{
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 3vw;
+            font-style: italic;
+            text-decoration: none;
+            color: rgb(33, 33, 33);
+            border-bottom: .08vw solid rgb(33,33,33);
+            vertical-align: middle;
+        }
+        bb{
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.7vw;
+            font-style: normal;
+            text-decoration: none;
+            color: rgb(33, 33, 33);
+            vertical-align: middle;
+        }
+        l {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 3vw;
+            font-style: italic;
+            text-decoration: none;
+            color: rgb(33, 33, 33);
+            vertical-align: middle;
+        }
+        .overlay{
+    opacity:1;
+    
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:95%;
+    z-index:1000;
+}
+
+/* width 
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+}
+
+/* Handle 
+::-webkit-scrollbar-thumb {
+    background:rgb(33,33,33);
+}
+*/
+#childaligner {
+    padding: 10% 0;
+}
+        img.img2{
+            height:2%;
+            width:2%;
+        }
+        img.img1{
+            height:5%;
+            width:5%;
+        }
+        a {
+  color: rgb(33, 33, 33);
+  text-decoration: none; 
+    }
+    j{}
+    </style>
+    <j id = "jj">
+    <div class="overlay"><canvas id="canv" width="100%" height="100%"></canvas></div>
+    <div style = "background-color:rgb(159,255,255); height:60vh;line-height: 8vh"> 
+            <div id="parentaligner">
+                    <div id="childaligner"><div><k><a href="/index.html">Carson Cummins</a></k></div>        
+                    <div><img class="img2" src="cross.png" alt="X"></div> </div>
+                </div>
+    </div> 
+    <div style = "background-color:rgb(241,241,241); height:60vh;line-height: 10vh">
+            <div id="parentaligner">
+                    <div id="childaligner"><div><k><a href="https://www.athletic.net/TrackAndField/Athlete.aspx?AID=10402152">Athletic.net</a></k></div>        
+                    <div><img class="img2" src="athletic.png" alt="X"></div> </div>
+                </div>
+</div> 
+<div style = "background-color:rgb(255,255,255); height:60vh;line-height: 10vh">
+        <div id="parentaligner">
+                <div id="childaligner"><div><k><a href="https://github.com/CarsonCummins11/">GitHub</a></k></div>
+                <div><img class="img2" src="github.png" alt="X"></div> </div>
+            </div>
+</div> 
+<div style = "background-color:rgb(255,154,156); height:60vh;line-height: 5vw">
+        <div><l>About</l></div>
+        <div><bb>text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </bb></div>
+
+</div> 
+<div style = "background-color:rgb(241,241,241); height:60vh;line-height: 5vw">
+        <div><l>Academics</l></div>   
+        <div><bb>text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text </bb></div>
+</div> 
+<div style = "background-color:rgb(255,255,255); height:60vh;line-height: 5vw">
+        <div><l>Experience</l></div>   
+        <div><bb>text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text 
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+        </bb></div>
+</div> 
+<div style = "background-color:rgb(255,255,162); height:60vh;line-height: 5vw">
+        <div><l>Athletics</l></div>   
+        <div><bb>text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text 
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+                text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+        </bb></div>
+</div> 
+</j>
+<script>
+let imgs = [];
+for(i = 0; i < 8; i++){
+    imgs[i] = new Image(20,20);
+    imgs[i].src = "runner-"+(i+1)+".png";
+}
+window.onscroll = function() {refresh()};
+function refresh(){
+let c = document.getElementById("canv");
+c.width = window.innerWidth;
+c.height = window.innerHeight;
+let ctx = c.getContext("2d");
+console.log(window.innerWidth-getPosition(c).x);
+ctx.drawImage(imgs[Math.floor((window.scrollY/25)%8)],(window.innerWidth-getPosition(c).x)-60,window.scrollY/3.4,40,40);
+}
+
+// Helper function to get an element's exact position
+function getPosition(el) {
+  var xPos = 0;
+  var yPos = 0;
+ 
+  while (el) {
+    if (el.tagName == "BODY") {
+      // deal with browser quirks with body/window/document and page scroll
+      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+      var yScroll = el.scrollTop || document.documentElement.scrollTop;
+ 
+      xPos += (el.offsetLeft - xScroll + el.clientLeft);
+      yPos += (el.offsetTop - yScroll + el.clientTop);
+    } else {
+      // for all other non-BODY elements
+      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+    }
+ 
+    el = el.offsetParent;
+  }
+  return {
+    x: xPos,
+    y: yPos
+  };
+}
+
+
+</script>
+</html>
