@@ -1,169 +1,67 @@
 <!DOCTYPE HTML>
 <html>
+  <link rel="stylesheet" href="https://use.typekit.net/aup7dku.css">
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200i,300');
-        html,body,pre {padding:0; margin:0;text-align: center;}
-        
-        k{
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 3vw;
-            font-style: italic;
-            text-decoration: none;
-            color: rgb(33, 33, 33);
-            border-bottom: .08vw solid rgb(33,33,33);
-            vertical-align: middle;
-        }
-        bb{
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 1.7vw;
-            font-style: normal;
-            text-decoration: none;
-            color: rgb(33, 33, 33);
-            vertical-align: middle;
-        }
-        l {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 3vw;
-            font-style: italic;
-            text-decoration: none;
-            color: rgb(33, 33, 33);
-            vertical-align: middle;
-        }
-        .overlay{
-    opacity:1;
-    
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0px;
-    left:95%;
-    z-index:1000;
-}
-body{
-  cursor:default;
-  overflow-x:hidden;
-}
-#childaligner {
-    padding: 10% 0;
-}
-        img.img2{
-            height:2%;
-            width:2%;
-        }
-        img.img1{
-            height:5%;
-            width:5%;
-        }
-        a {
-  color: rgb(33, 33, 33);
-  text-decoration: none; 
-    }
-.title{
-  transition: all .2s ease-in-out;
-  cursor:default;
-}
-.title:hover{
-  transform: scale(1.1);
-}
-.section{
-  background-color:rgb(238, 208, 208);
-  height:80vh;
-  line-height: 5vw;
-  border-radius:50px; 
-  box-shadow: 0px 20px 20px gray;
-  transition: all .5s ease-in-out;
-  margin-right: 10vw;
-  margin-left:10vw;
-}
-.section:hover{
-  transform: scale(1.1);
-}
+      body{
+        background-color:rgb(108, 129, 98)
+      }
+      h1{
+        position:absolute;
+        text-align: center;
+        left:0;
+        right:0;
+        font-family: atrament-web, sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        color:white;
+        font-size:100px;
+        top: 200px;
+      }
+      .text{
+        font-family: atrament-web, sans-serif;
+        font-weight: 300;
+        font-style: normal;
+        font-size:50px;
+        color:white;
+        letter-spacing: 3px;
+        transition: all .7s ease-in-out;
+      }
+      .text:hover{
+        transform: scale(1.1);
+        text-shadow: 0px 9px 9px black;
+      }
+      .me{
+        position:absolute;
+        top:800px;
+        right:100px;
+        width:700px;
+      }
+      .portrait{
+        position:absolute;
+        top:800px;
+        width:500px;
+        left:70px;
+        -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+      }
+      .flui-img{
+        position:absolute;
+        top:1760px;
+        width:200px;
+        right:200px;
+      }
+      .flui{
+        position:absolute;
+        top:1700px;
+        left:70px;
+        width:700px;
+      }
     </style>
-    <j id = "jj">
-    <div class="overlay"><canvas id="canv" width="100%" height="100%"></canvas></div>
-    <div style = "background-color:rgb(159,255,255); height:60vh;line-height: 8vh"> 
-            <div id="parentaligner">
-                    <div id="childaligner"><div><k><a href="index.html">Carson Cummins</a></k></div>        
-                    <div><img class="img2" src="cross.png" alt="X"></div> </div>
-                </div>
-    </div> 
-<div style = "background-color:rgb(255,255,255); height:60vh;line-height: 10vh">
-        <div id="parentaligner">
-                <div id="childaligner"><div><k><a href="https://github.com/CarsonCummins11/">GitHub</a></k></div>
-                <div><img class="img2" src="github.png" alt="X"></div> </div>
-            </div>
-</div> 
-<div class='section'>
-        <div class="title"><l>About</l></div>
-        <div><bb>I'm a senior at Sunset High School in Portland, Oregon. My entire life, I've been surrounded by startups. Almost daily, I run while my dad bikes alongside
-          while we discuss business ideas. Since middle school, I've been making websites or apps for these ideas. I love the process of creating an app from nothing. When not 
-          programming, I'm running- up to 80 miles a week. The discipline to do this allows me to endure mentally well past anything anyone else will in pursuit of perfection of my products.
-        </bb></div>
-
-</div> 
-<br>
-<br>
-<div class='section'>
-        <div class="title"><l>Academics</l></div>   
-        <div><bb> I have enough college credits for a minor in both CS and Math, and have maintained a 4.45 GPA in highschool. I've never taken a grade level class, except when required, 
-          and even then I push myself to find interesting new ways to apply it (This website was designed during my Graphic Design 1 class). Despite my high achievements, I take pride in my
-          ability to not study. Instead, I rely on fully understanding the topic to derive any answer I'll need.
-        </bb></div>
-</div> 
-<br>
-<br>
-<div class='section'>
-        <div class="title"><l>Experience</l></div>   
-        <div><bb>Although my age would suggest otherwise, I've had experience in industry on multiple scales. I worked at Intel programming a massive test suite for their gamecast product. I've also worked 
-          in companies as small as my local ski area, writing a website viewed only a few thousand times a month. I have experience working in dozens of languages, but I primarily focus on Python, C++, Java and JS. 
-          I find that these four languages together can accomplish pretty much any task you set your mind to.  
-</bb></div>
-</div> 
-<br>
-<br>
-</j>
-<script>
-let imgs = [];
-for(i = 0; i < 8; i++){
-    imgs[i] = new Image(20,20);
-    imgs[i].src = "runner-"+(i+1)+".png";
-}
-window.onscroll = function() {refresh()};
-function refresh(){
-let c = document.getElementById("canv");
-c.width = window.innerWidth;
-c.height = window.innerHeight;
-let ctx = c.getContext("2d");
-ctx.drawImage(imgs[Math.floor((window.scrollY/25)%8)],(window.innerWidth-getPosition(c).x)-60,window.scrollY/3.4,40,40);
-}
-
-// Helper function to get an element's exact position
-function getPosition(el) {
-  var xPos = 0;
-  var yPos = 0;
- 
-  while (el) {
-    if (el.tagName == "BODY") {
-      // deal with browser quirks with body/window/document and page scroll
-      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-      var yScroll = el.scrollTop || document.documentElement.scrollTop;
- 
-      xPos += (el.offsetLeft - xScroll + el.clientLeft);
-      yPos += (el.offsetTop - yScroll + el.clientTop);
-    } else {
-      // for all other non-BODY elements
-      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-    }
- 
-    el = el.offsetParent;
-  }
-  return {
-    x: xPos,
-    y: yPos
-  };
-}
-
-
-</script>
+    <body>
+      <h1>Carson Cummins<br><img style="width:96px;height:96px;"src="file:///Users/carsoncummins/Documents/coding/resume_site/cross.png"></h1>
+      <div class="me text">What's up! Nice to see you here. My name's Carson Cummins (That's me on the left). I'm a huge fan of two things: the outdoors and programming. I've logged thousands of hours on the trails, and even more on my keyboard. I've coded for companies as large as Intel down to companies as small as a local nordic ski area. I'm fluent in a dozen different programming languages, as well as Spanish.</div>
+      <img class="portrait" src='file:///Users/carsoncummins/Documents/coding/resume_site/IMG_1081.png'>
+      <div class="flui text">Right now, I'm working Flui, a revolutionary new AI driven tool for branded content. Flui automatically creates and runs branded content campaigns that focus on using smaller influencers to optimize the engagement recieved by each post. Currently, I expect to launch Flui in late March, so stay tuned and check out flui.co in the mean time.</div>
+      <img class="flui-img" src='file:///Users/carsoncummins/Documents/coding/resume_site/flui.png'>
+    </body>
 </html>
