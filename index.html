@@ -32,36 +32,251 @@
       }
       .me{
         position:absolute;
-        top:800px;
+        top:1900px;
         right:100px;
         width:700px;
       }
       .portrait{
         position:absolute;
-        top:800px;
+        top:1900px;
         width:500px;
         left:70px;
         -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
+        transform: scaleX(-1);
       }
       .flui-img{
         position:absolute;
-        top:1760px;
+        top:2860px;
         width:200px;
         right:200px;
+        cursor:pointer;
       }
       .flui{
         position:absolute;
-        top:1700px;
+        top:2800px;
         left:70px;
         width:700px;
       }
+      .github-img{
+        position:absolute;
+        top:3600px;
+        left:110px;
+        width:300px;
+        -webkit-filter: invert(1);
+        filter: invert(1);
+        cursor: pointer;
+      }
+      .github{
+        position:absolute;
+        top:3500px;
+        right:70px;
+        width:700px;
+      }
+      canvas { 
+        background:rgb(108, 129, 98);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 800px;
+        }
     </style>
     <body>
       <h1>Carson Cummins<br><img style="width:96px;height:96px;"src="/cross.png"></h1>
+        <canvas  onmousemove="mouse_position(event)" id="evocanvas" width="1000" height="1000"></canvas>
       <div class="me text">What's up! Nice to see you here. My name's Carson Cummins (That's me on the left). I'm a huge fan of two things: the outdoors and programming. I've logged thousands of hours on the trails, and even more on my keyboard. I've coded for companies as large as Intel down to companies as small as a local nordic ski area. I'm fluent in a dozen different programming languages, as well as Spanish.</div>
-      <img class="portrait" src='/IMG_1081.png'>
-      <div class="flui text">Right now, I'm working Flui, a revolutionary new AI driven tool for branded content. Flui automatically creates and runs branded content campaigns that focus on using smaller influencers to optimize the engagement recieved by each post. Currently, I expect to launch Flui in late March, so stay tuned and check out flui.co in the mean time.</div>
-      <img class="flui-img" src='/flui.png'>
+      <img class="portrait" src='IMG_1081.png'>
+      <div class="flui text">Right now, I'm working Flui, a revolutionary new AI driven tool for branded content. Flui automatically creates and runs branded content campaigns that focus on using smaller influencers to optimize the engagement recieved by each post. Currently, I expect to launch Flui in late March, so stay tuned and check out flui.co by clicking the image on the right in the mean time.</div>
+      <img onclick="window.location.href='https://flui.co'"class="flui-img" src='/flui.png'>
+      <div class="github text">I've also worked on some pretty cool stuff in my free time - things like genetically evolved recurrent neural networks to simulate a fish pond, or a GRU network that writes english papers. You can check it all out at my github! Just click on the image on the left.</div>
+      <img onclick="window.location.href='https://github.com/CarsonCummins11'" class="github-img" src='/github.png'>
     </body>
+    <script>
+    var mouseX = 0;
+    var mouseY = 0;
+    class Location{
+        constructor(score,x,y,left,right, name, desc){
+            this.score = score;
+            this.description = desc;
+            this.x = x;
+            this.y = y;
+            this.left = left;
+            this.right = right;
+            this.name = name;
+            this.drawn = false;
+
+        } 
+        resetDraws(){
+            this.drawn = false;
+            if(this.left!=null){this.left.resetDraws()}
+            if(this.right!=null){this.right.resetDraws()}
+        }
+        draw(){
+            if(!this.drawn){
+            this.drawn = true;
+            //recursively draws, I realize this is not best practice
+            ctx.beginPath();
+            ctx.lineWidth = 3;
+            ctx.moveTo(this.x,this.y);
+            if(this.left!=null){ctx.lineTo(this.left.x,this.left.y);}
+            ctx.moveTo(this.x,this.y);
+            if(this.right!=null){ctx.lineTo(this.right.x,this.right.y);}
+            ctx.strokeStyle = "white";
+            ctx.fillStyle = "white";
+            ctx.font = 'normal 20pt atrament-web'
+            ctx.textAlign = "end"; 
+            ctx.stroke();
+            ctx.closePath();
+            ctx.fillText(this.name,this.x,this.y);
+            if(this.left!=null){this.left.draw();}
+            if(this.right!=null){this.right.draw();}
+            }
+        }
+    }
+    function mouse_position(e)
+    {
+        var br = e.target.getBoundingClientRect();
+        mouseX = e.clientX-br.left;
+        mouseY = e.clientY-br.top;
+    }
+    class Person {
+        constructor(decisions,color){
+            this.decisions=decisions;
+            this.color=color;
+            this.x = 20;
+            this.y = 500;
+            this.speed = 3+Math.random()*4;
+            this.onDecision = 0;
+        }
+        breed(other){
+            var dec = [];
+            dec.length = this.decisions.length;
+            for(var i = 0; i<this.decisions.length; i++){
+                if(Math.random()<.5){
+                    dec[i] = this.decisions[i];
+                }else{
+                    dec[i] = other.decisions[i];
+                }
+            }
+            return new Person(dec,this.color);
+        }
+        draw(){
+            drawCircle(this.x,this.y,this.color);
+        }
+        moveTowards(x){
+            if(Math.abs(this.x-x.x)<this.speed && Math.abs(this.y-x.y)<this.speed){
+                return true;
+            }
+            var angle = Math.atan2(this.y-x.y,this.x-x.x);
+            var xmove = Math.cos(angle)*this.speed;
+            var ymove = Math.sin(angle)*this.speed;
+            this.x-=xmove;
+            this.y-=ymove;
+            return false;
+        }
+    }
+    var canvas = document.getElementById("evocanvas");
+    var ctx = canvas.getContext("2d"); 
+    //construct location tree
+    startup = new Location(2,950,20,null,null,"An agile, versatile employee", "");
+    owncompany = new Location(2,950,250,null,null,"An experienced and capable employee","");
+    ultra = new Location(2,950,375,null,null,"The right man for any job", "");
+    cubefarm = new Location(0,950,750,null,null,"A bad hiring decision", "");
+    follow = new Location(-1,800,875,cubefarm,cubefarm,"Does everything poorly","");
+    home = new Location(-1,800,750,cubefarm,cubefarm,"Lacks the skills needed    ","");
+    svbad = new Location(-1,800,500,cubefarm,cubefarm,"Lacks the versatility needed", "");
+    boulder = new Location(-1,600,250,ultra,ultra,"Full stack ability","");
+    svgood = new Location(-1,600,125,owncompany,startup,"Youth with experience", "");
+    b = new Location(-1,400,875,home,follow,"Broad, shallow skillset",".");
+    mcs = new Location(-1,400,625,svbad,home,"A narrow skillset","");
+    mcsb = new Location(-1,400,125,svgood,boulder,"A broad, deep skillset","");
+    otherschool = new Location(-1,200,750,mcs,b,"Another Candidate", "");
+    rochester = new Location(-1,200,250,mcsb,mcsb,"Me", "");
+    strt = new Location(-1,20,500,rochester,otherschool,"","");
+    //build initial population
+    var population = [];
+    for(var i=0; i< 50; i++){
+        population.push(randomPerson());
+    }
+    let counter = 0;
+    let gen = 0;
+    //keep stepping through generations forever
+   setInterval(function(){
+       strt.resetDraws();
+        counter+=1;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.textAlign='start'
+            ctx.fillStyle='white'
+            ctx.fillText('Instead of reading the boring stuff, let this pathfinding genetic algorithm decide on me for you!',0,20)
+            strt.draw();
+            ctx.fillText("Generation:"+gen,0,20);
+            for(i = 0; i< population.length; i++){
+                var arrived = population[i].moveTowards(getNextLocation(population[i].onDecision,population[i].decisions));
+                population[i].draw();
+                if(arrived){
+                    population[i].onDecision+=1;
+                    if(population[i].onDecision>4){
+                        population[i].onDecision--;
+                    }
+                }
+            }
+        if(counter%430==0){
+        gen+=1;
+        //choose what population survives
+        var newpop = [];
+        for(i = 0; i< population.length; i++){
+            var score = getNextLocation(4,population[i].decisions).score;
+            if(Math.random()*4<score+1){
+                newpop.push(new Person(population[i].decisions,population[i].color));
+            }
+        }
+        population = newpop;
+        //higher scoring members become more likely to breed
+        var addpop = [];
+        for(i = 0; i< population.length; i++){
+            var score = getNextLocation(4,population[i].decisions).score;
+            for(j = 0; j<score; j++){
+                addpop.push(new Person(population[i].decisions,population[i].color));
+            }
+        }
+        population = population.concat(addpop);
+        //breed surviving population
+        newpop = []
+        while(newpop.length<20){
+            var pers1 = population[Math.floor(Math.random()*population.length)];
+            var pers2 = population[Math.floor(Math.random()*population.length)];
+            newpop.push(pers1.breed(pers2));
+        }
+        population = newpop;
+    }
+    },70);
+    function getNextLocation(dec,decisions){
+        //traverse location tree base on decision array
+        let ret = strt;
+        for(l = 0; l<dec; l++){
+            if(decisions[l]==0){
+                ret = ret.left;
+            }else{
+                ret = ret.right;
+            }
+        }
+        return ret;
+    }
+    function drawCircle(x,y,color){
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI*2);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.fillStyle = "black";
+        ctx.closePath();
+    }
+    function randomPerson(){
+        var col = '#FFFFFF';
+        var dec = [];
+        for(j = 0; j<4; j++){
+            dec.push(Math.round(Math.random()));
+        }
+        return new Person(dec,col);
+    }
+    
+    </script>
 </html>
